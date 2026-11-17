@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="{{CSP}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#7a2a20">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>おいしい店マップ（非公式）</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <style>{{STYLE}}</style>
+</head>
+<body>
+  <header>
+    <h1>おいしい店マップ（非公式）</h1>
+    <p class="lead">評判の根拠を公開情報で確かめられた首都圏の名店だけを載せた、個人作成の非公式マップです。</p>
+    <div class="toolbar">
+      <button id="locate" type="button">現在地</button>
+      <button id="nearest" type="button">最寄り</button>
+    </div>
+    <p id="status" role="status">準備しています…</p>
+    <p id="geoStatus" role="status" hidden></p>
+  </header>
+
+  <section id="filters" aria-label="絞り込み">
+    <div class="chip-group">
+      <h2 id="genreLabel">ジャンル</h2>
+      <div class="chips" id="genreChips" role="group" aria-labelledby="genreLabel"></div>
+    </div>
+    <div class="chip-group">
+      <h2 id="tagLabel">根拠</h2>
+      <div class="chips" id="tagChips" role="group" aria-labelledby="tagLabel"></div>
+    </div>
+    <p class="filter-note"><span id="filterCount"></span> <button type="button" id="clearFilters" class="linklike" hidden>絞り込みを解除</button></p>
+  </section>
+
+  <main>
+    <div id="mapWrap">
+      <div id="map" role="application" aria-label="地図"></div>
+      <div id="empty" hidden>条件に合う店がこの範囲にありません。地図を広げるか、絞り込みを変えてください。</div>
+    </div>
+
+    <section id="card" hidden aria-live="polite" aria-labelledby="cardName">
+      <h2 id="cardName"></h2>
+      <dl>
+        <dt>エリア・最寄り駅</dt><dd id="cardArea"></dd>
+        <dt>ジャンル</dt><dd id="cardGenre"></dd>
+        <dt>看板メニュー</dt><dd id="cardMenu"></dd>
+        <dt>根拠</dt><dd id="cardBasis"></dd>
+        <dt>最終確認日</dt><dd id="cardChecked"></dd>
+      </dl>
+      <div class="card-actions">
+        <a id="cardTabelog" class="act act-tabelog" target="_blank" rel="noopener noreferrer">食べログで見る</a>
+        <a id="cardRoute" class="act act-route" target="_blank" rel="noopener noreferrer">Googleマップで案内</a>
+      </div>
+      <p class="card-hint">地図の何もないところをタップすると閉じます。</p>
+    </section>
+
+    <section id="list" aria-labelledby="listTitle">
+      <h2 id="listTitle">近い順</h2>
+      <ol id="items"></ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>本アプリは個人が作成した非公式の地図です。食べログ（株式会社カカクコム）の公式サービスではなく、提携関係もありません。</p>
+    <p>評点・口コミ・写真は掲載していません。各店の詳細はリンク先の食べログでご確認ください。</p>
+    <p>営業時間・定休日・価格は変更される場合があります。お出かけ前に店舗の公式情報をご確認ください。</p>
+    <p>地図データ © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors（ODbL）</p>
+    <p class="small">掲載店の選定と「根拠」の要約は本アプリ作成者が公開情報をもとに行ったものです（{{CHECKED_JA}}調査）。店の位置は OpenStreetMap の登録地点、または公開されている住所から求めた地点です（住所からの位置計算には国土地理院「住所検索API」を使用。出典：国土地理院）。</p>
+  </footer>
+
+  <script type="application/json" id="storeData">{{DATA}}</script>
+  <script src="./vendor/leaflet/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script>{{SCRIPT}}</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+:root {
+  --bg: #f7f3ef;
+  --panel: #ffffff;
+  --ink: #2a2321;
+  --muted: #5d5350;
+  --accent: #7a2a20;
+  --pin: #b03a2e;
+  --line: #ddd3cc;
+  --chip-on: #7a2a20;
+  font-size: 17px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+header {
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px;
+  background: var(--accent);
+  color: #fff;
+}
+h1 { margin: 0 0 4px; font-size: 21px; }
+.lead { margin: 0 0 10px; font-size: 13px; color: #f3e3df; }
+
+button { font: inherit; cursor: pointer; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+.toolbar button {
+  font-size: 17px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: #fff;
+  color: var(--accent);
+  font-weight: 700;
+}
+#nearest { background: #1f6f5c; border-color: #fff; color: #fff; }
+#status { margin: 8px 0 0; font-size: 15px; color: #f3e3df; }
+#geoStatus { margin: 6px 0 0; font-size: 15px; color: #fff; }
+
+#filters { padding: 10px 12px 0; }
+.chip-group { margin-bottom: 6px; }
+.chip-group h2 { margin: 0 0 4px; font-size: 14px; color: var(--muted); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+/* スマホでは1行の横スクロールにして、地図が下へ押し出されないようにする */
+@media (max-width: 600px) {
+  .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+  .chip { flex: 0 0 auto; }
+}
+.chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 15px;
+}
+.chip[aria-pressed="true"] { background: var(--chip-on); border-color: var(--chip-on); color: #fff; }
+.chip .n { color: var(--muted); font-size: 12px; margin-left: 3px; }
+.chip[aria-pressed="true"] .n { color: #f3e3df; }
+.filter-note { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+.linklike { border: 0; background: none; color: #0b5f8a; text-decoration: underline; padding: 0 4px; font-size: 14px; }
+
+main { display: flex; flex-direction: column; gap: 12px; padding: 10px 12px 12px; }
+#mapWrap { position: relative; }
+#map {
+  height: 55vh;
+  min-height: 280px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #e9e4df;
+}
+.leaflet-control-attribution { font-size: 12px; }
+#empty {
+  position: absolute; left: 10px; right: 10px; bottom: 30px; z-index: 500;
+  padding: 10px 12px; border-radius: 10px;
+  background: rgba(42, 35, 33, 0.88); color: #fff; font-size: 14px; text-align: center;
+}
+
+#card, #list {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+#card { border: 2px solid var(--accent); }
+#card h2 { margin: 0 0 8px; font-size: 20px; }
+#card dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; font-size: 15px; }
+#card dt { color: var(--muted); }
+#card dd { margin: 0; }
+.card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.act {
+  flex: 1 1 10em;
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+}
+.act-tabelog { background: #fff; color: var(--accent); border: 2px solid var(--accent); }
+.act-route { background: var(--accent); color: #fff; border: 2px solid var(--accent); }
+.card-hint { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+
+#list h2 { margin: 0 0 8px; font-size: 18px; }
+#items { list-style: none; margin: 0; padding: 0; }
+#items li { border-bottom: 1px solid var(--line); }
+#items li:last-child { border-bottom: 0; }
+#items li button {
+  display: block; width: 100%;
+  padding: 10px 6px;
+  border: 0; background: transparent; color: inherit; text-align: left;
+}
+#items li button[aria-current="true"] { background: #f6e8e4; }
+#items .nm { font-weight: 700; }
+#items .dist { color: var(--muted); font-size: 14px; margin-left: 6px; }
+#items .sub { display: block; color: var(--muted); font-size: 13px; }
+#items li.none { padding: 10px 6px; color: var(--muted); }
+
+/* 地図のピン（フォークとナイフ） */
+.shop-pin {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--pin);
+  font-size: 15px; line-height: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+.shop-pin.sel { background: #1f6f5c; transform: scale(1.25); }
+
+footer {
+  padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  background: #efe8e2;
+  font-size: 13px;
+  color: var(--ink);
+}
+footer p { margin: 0 0 6px; }
+footer .small { color: var(--muted); font-size: 12px; }
+footer a { color: #0b5f8a; }
+
+[hidden] { display: none !important; }

@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "おいしい店マップ",
+  "short_name": "おいしい店マップ",
+  "description": "評判の根拠を公開情報で確かめられた首都圏の名店だけを載せた、個人作成の非公式マップ",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#7a2a20",
+  "background_color": "#f7f3ef",
+  "lang": "ja",
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

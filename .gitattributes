@@ -1,0 +1,2 @@
+# 改行を変換しない（leaflet の SRI ハッシュと index.html の CSP ハッシュを保つため、ファイルをそのまま公開する）
+* -text
